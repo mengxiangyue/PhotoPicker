@@ -13,12 +13,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let rightButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "rightButtonClick:")
+        self.navigationItem.setRightBarButtonItem(rightButton, animated: true)
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func rightButtonClick(buttonItem: UIBarButtonItem) {
+        let photoPickerViewController = PhotoPickerViewController()
+        self.presentViewController(photoPickerViewController, animated: true, completion: nil)
     }
 
 

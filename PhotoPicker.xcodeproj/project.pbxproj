@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E93EC321B56584B00D9E7DA /* PhotoPickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E93EC311B56584B00D9E7DA /* PhotoPickerHelper.swift */; };
 		8EE756801B5566110055E3D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE7567F1B5566110055E3D2 /* AppDelegate.swift */; };
 		8EE756821B5566110055E3D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE756811B5566110055E3D2 /* ViewController.swift */; };
 		8EE756851B5566110055E3D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EE756831B5566110055E3D2 /* Main.storyboard */; };
 		8EE756871B5566110055E3D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EE756861B5566110055E3D2 /* Assets.xcassets */; };
 		8EE7568A1B5566110055E3D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EE756881B5566110055E3D2 /* LaunchScreen.storyboard */; };
-		8EE756991B55663D0055E3D2 /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EE756981B55663D0055E3D2 /* Source.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EE756991B55663D0055E3D2 /* PhotoPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EE756981B55663D0055E3D2 /* PhotoPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EE7569D1B55663D0055E3D2 /* PhotoPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE756961B55663D0055E3D2 /* PhotoPicker.framework */; };
 		8EE7569E1B55663D0055E3D2 /* PhotoPicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE756961B55663D0055E3D2 /* PhotoPicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EE756A61B5566B00055E3D2 /* PhotoGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE756A51B5566B00055E3D2 /* PhotoGroupTableViewCell.swift */; };
@@ -47,6 +48,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8E93EC311B56584B00D9E7DA /* PhotoPickerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerHelper.swift; sourceTree = "<group>"; };
+		8E93EC341B5671BC00D9E7DA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		8E93EC351B5671BC00D9E7DA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		8EE7567C1B5566110055E3D2 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE7567F1B5566110055E3D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EE756811B5566110055E3D2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +59,7 @@
 		8EE756891B5566110055E3D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EE7568B1B5566110055E3D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EE756961B55663D0055E3D2 /* PhotoPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PhotoPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8EE756981B55663D0055E3D2 /* Source.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
+		8EE756981B55663D0055E3D2 /* PhotoPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoPicker.h; sourceTree = "<group>"; };
 		8EE7569A1B55663D0055E3D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EE756A51B5566B00055E3D2 /* PhotoGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGroupTableViewCell.swift; sourceTree = "<group>"; };
 		8EE756A71B5566CF0055E3D2 /* PhotoGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGroupTableViewController.swift; sourceTree = "<group>"; };
@@ -118,13 +122,14 @@
 		8EE756971B55663D0055E3D2 /* PhotoPicker */ = {
 			isa = PBXGroup;
 			children = (
-				8EE756981B55663D0055E3D2 /* Source.h */,
+				8EE756981B55663D0055E3D2 /* PhotoPicker.h */,
 				8EE7569A1B55663D0055E3D2 /* Info.plist */,
 				8EE756A51B5566B00055E3D2 /* PhotoGroupTableViewCell.swift */,
 				8EE756A71B5566CF0055E3D2 /* PhotoGroupTableViewController.swift */,
 				8EE756A91B5566F80055E3D2 /* PhotoPickerViewController.swift */,
 				8EE756AB1B55672E0055E3D2 /* PhotoCollectionViewController.swift */,
 				8EE756AD1B5567510055E3D2 /* PhotoCollectionViewCell.swift */,
+				8E93EC311B56584B00D9E7DA /* PhotoPickerHelper.swift */,
 			);
 			name = PhotoPicker;
 			path = Source;
@@ -137,7 +142,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EE756991B55663D0055E3D2 /* Source.h in Headers */,
+				8EE756991B55663D0055E3D2 /* PhotoPicker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E93EC321B56584B00D9E7DA /* PhotoPickerHelper.swift in Sources */,
 				8EE756A81B5566CF0055E3D2 /* PhotoGroupTableViewController.swift in Sources */,
 				8EE756AE1B5567510055E3D2 /* PhotoCollectionViewCell.swift in Sources */,
 				8EE756A61B5566B00055E3D2 /* PhotoGroupTableViewCell.swift in Sources */,
@@ -275,6 +281,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8EE756841B5566110055E3D2 /* Base */,
+				8E93EC341B5671BC00D9E7DA /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -283,6 +290,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8EE756891B5566110055E3D2 /* Base */,
+				8E93EC351B5671BC00D9E7DA /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -406,10 +414,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = yue.Source;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = yuexxx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -427,10 +437,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = yue.Source;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = yuexxx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -457,6 +469,7 @@
 				8EE756901B5566110055E3D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8EE7569F1B55663D0055E3D2 /* Build configuration list for PBXNativeTarget "PhotoPicker" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +478,7 @@
 				8EE756A11B55663D0055E3D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
