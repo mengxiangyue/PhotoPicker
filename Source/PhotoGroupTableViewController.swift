@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoGroupTableViewController: UIViewController, UITableViewDataSource {
+class PhotoGroupTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let groupTableViewCellIdentifier = "GroupTableViewCell"
 
     var groupTableView: UITableView!
@@ -18,6 +18,7 @@ class PhotoGroupTableViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         self.groupTableView = UITableView()
         self.groupTableView.dataSource = self
+        self.groupTableView.delegate = self
         self.groupTableView.rowHeight = 66.0
 //        self.groupTableView.separatorInset = UIEdgeInsetsZero
         self.groupTableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -25,6 +26,12 @@ class PhotoGroupTableViewController: UIViewController, UITableViewDataSource {
         self.view.addSubview(self.groupTableView)
         
         self.customLayout()
+        
+        let photoGroup = PhotoPickerHelper.sharedInstance.photoGroups[0]
+        let photoCollectionViewController = PhotoCollectionViewController()
+        photoCollectionViewController.title = photoGroup.groupName
+        photoCollectionViewController.photoGroup = photoGroup
+        self.navigationController?.pushViewController(photoCollectionViewController, animated: false)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -32,6 +39,7 @@ class PhotoGroupTableViewController: UIViewController, UITableViewDataSource {
         self.title = "照片"
         let cancleBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Plain, target: self, action: "cancle:")
         self.navigationItem.rightBarButtonItem = cancleBarButtonItem
+        
         
     }
     
@@ -52,9 +60,20 @@ class PhotoGroupTableViewController: UIViewController, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.groupTableViewCellIdentifier, forIndexPath: indexPath) as! PhotoGroupTableViewCell
         let photoGroup = PhotoPickerHelper.sharedInstance.photoGroups[indexPath.row]
-        cell.groupImageView.image = UIImage(named: "1")
-        cell.groupNameLable.text = photoGroup.groupName
+        PhotoPickerHelper.sharedInstance.firstPhotoThumbnails(photoGroup) { (image, info) -> Void in
+            cell.groupImageView.image = image
+        }
+        cell.groupNameLable.text = "\(photoGroup.groupName) (\(photoGroup.photoCount))"
         return cell        
+    }
+    
+    // MARK: - UITableViewDelegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let photoGroup = PhotoPickerHelper.sharedInstance.photoGroups[indexPath.row]
+        let photoCollectionViewController = PhotoCollectionViewController()
+        photoCollectionViewController.photoGroup = photoGroup
+        photoCollectionViewController.title = photoGroup.groupName
+        self.navigationController?.pushViewController(photoCollectionViewController, animated: true)
     }
     
     // MARK: - click

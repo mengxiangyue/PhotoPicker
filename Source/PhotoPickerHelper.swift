@@ -13,14 +13,14 @@ class PhotoPickerHelper {
     // 所有的照片分组
     var photoGroups = [PhotoGroup]()
     
-    var imageManager: PHCachingImageManager!
+    var imageManager: PHImageManager!
     
     static let sharedInstance = {
             return PhotoPickerHelper()
         }()
     
     private init() {
-        self.imageManager = PHCachingImageManager()
+        self.imageManager = PHImageManager.defaultManager()
         
         // 所有图片
         let options = PHFetchOptions()
@@ -28,7 +28,7 @@ class PhotoPickerHelper {
         let assetsFetchResults = PHAsset.fetchAssetsWithOptions(options)
         if assetsFetchResults.count > 0 {
             // TODO: 国际化
-            let photoGroup = PhotoGroup(groupName: "所有图片", assetsFetchResult: assetsFetchResults)
+            let photoGroup = PhotoGroup(groupName: "相机胶卷", assetsFetchResult: assetsFetchResults)
             self.photoGroups += [photoGroup]
         }
         

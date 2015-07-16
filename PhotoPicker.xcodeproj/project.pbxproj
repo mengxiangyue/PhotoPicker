@@ -23,6 +23,8 @@
 		8EE756AA1B5566F80055E3D2 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE756A91B5566F80055E3D2 /* PhotoPickerViewController.swift */; };
 		8EE756AC1B55672E0055E3D2 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE756AB1B55672E0055E3D2 /* PhotoCollectionViewController.swift */; };
 		8EE756AE1B5567510055E3D2 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE756AD1B5567510055E3D2 /* PhotoCollectionViewCell.swift */; };
+		8EEBDC851B581C5B0039D89B /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEBDC841B581C5B0039D89B /* SnapKit.framework */; };
+		8EEBDC861B581C5B0039D89B /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEBDC841B581C5B0039D89B /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8EE7569E1B55663D0055E3D2 /* PhotoPicker.framework in Embed Frameworks */,
+				8EEBDC861B581C5B0039D89B /* SnapKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +72,7 @@
 		8EE756A91B5566F80055E3D2 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		8EE756AB1B55672E0055E3D2 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		8EE756AD1B5567510055E3D2 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		8EEBDC841B581C5B0039D89B /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EE7569D1B55663D0055E3D2 /* PhotoPicker.framework in Frameworks */,
+				8EEBDC851B581C5B0039D89B /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +98,7 @@
 		8EE756731B5566110055E3D2 = {
 			isa = PBXGroup;
 			children = (
+				8EEBDC841B581C5B0039D89B /* SnapKit.framework */,
 				8EE7567E1B5566110055E3D2 /* Demo */,
 				8EE756971B55663D0055E3D2 /* PhotoPicker */,
 				8EE7567D1B5566110055E3D2 /* Products */,
@@ -202,6 +208,7 @@
 				TargetAttributes = {
 					8EE7567B1B5566110055E3D2 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = DS3ENKLZBN;
 					};
 					8EE756951B55663D0055E3D2 = {
 						CreatedOnToolsVersion = 7.0;
@@ -391,12 +398,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS";
 				INFOPLIST_FILE = PhotoPicker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(SRCROOT)/Carthage/Build/iOS";
 				PRODUCT_BUNDLE_IDENTIFIER = yue.PhotoPicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -404,12 +415,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS";
 				INFOPLIST_FILE = PhotoPicker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(SRCROOT)/Carthage/Build/iOS";
 				PRODUCT_BUNDLE_IDENTIFIER = yue.PhotoPicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

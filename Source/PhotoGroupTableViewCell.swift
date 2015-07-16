@@ -22,6 +22,7 @@ class PhotoGroupTableViewCell: UITableViewCell {
         
         self.groupImageView = UIImageView()
         self.groupImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        self.groupImageView.clipsToBounds = true
         self.addSubview(groupImageView)
         
         self.groupNameLable = UILabel()
