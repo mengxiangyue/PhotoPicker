@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+class PhotoPickerHelper {
+    static let sharedInstance = {
+            return PhotoPickerHelper()
+        }()
+    
+    private init() {
+        
+    }
+    
+    // 获取照片分组
+    
+    // 获取分组内的照片
+    
+    // 获取某一张照片
+}

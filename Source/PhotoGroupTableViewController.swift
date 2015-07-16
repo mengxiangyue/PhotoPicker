@@ -8,11 +8,22 @@
 
 import UIKit
 
-class PhotoGroupTableViewController: UIViewController {
+class PhotoGroupTableViewController: UIViewController, UITableViewDataSource {
+    let groupTableViewCellIdentifier = "GroupTableViewCell"
 
+    var groupTableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.groupTableView = UITableView()
+        self.groupTableView.dataSource = self
+        self.groupTableView.rowHeight = 66.0
+        self.groupTableView.separatorInset = UIEdgeInsetsZero
+        self.groupTableView.registerClass(PhotoGroupTableViewCell.self, forCellReuseIdentifier: groupTableViewCellIdentifier)
+        self.view.addSubview(self.groupTableView)
+        
+        self.customLayout()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -20,15 +31,30 @@ class PhotoGroupTableViewController: UIViewController {
         self.title = "照片"
         let cancleBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Plain, target: self, action: "cancle:")
         self.navigationItem.rightBarButtonItem = cancleBarButtonItem
+        
     }
     
-//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 22
-//    }
-//    
-//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        return nil
-//    }
+    func customLayout() {
+        self.groupTableView.snp_makeConstraints { (make) -> Void in
+            make.left.equalTo(self.view)
+            make.right.equalTo(self.view)
+            make.top.equalTo(self.view)
+            make.bottom.equalTo(self.view)
+        }
+    }
+    
+    // MARK: - UITableViewDataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 22
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(self.groupTableViewCellIdentifier)
+        cell?.imageView?.image = UIImage(named: "1")
+        cell?.textLabel?.text = "测试"
+        return cell!
+        
+    }
     
     // MARK: - click
     func cancle(barButtonItme: UIBarButtonItem) {
