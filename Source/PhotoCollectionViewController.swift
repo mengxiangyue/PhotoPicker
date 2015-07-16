@@ -36,12 +36,22 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDataSourc
         layout.minimumInteritemSpacing = 0.0 // item间距
         layout.itemSize = CGSize(width: 122, height: 122) // item 大小
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // section的边距
-        self.photoCollectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
+        self.photoCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
         self.photoCollectionView.registerClass(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: self.photoCollectionViewIdentifier)
         self.photoCollectionView.dataSource = self
         self.photoCollectionView.delegate = self
         self.view.addSubview(self.photoCollectionView)
         
+        self.customLayout()
+    }
+    
+    func customLayout() {
+        self.photoCollectionView.snp_makeConstraints { (make) -> Void in
+            make.left.equalTo(self.view)
+            make.right.equalTo(self.view)
+            make.top.equalTo(self.view)
+            make.bottom.equalTo(self.view)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

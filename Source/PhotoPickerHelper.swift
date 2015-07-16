@@ -67,7 +67,7 @@ class PhotoPickerHelper {
         let scale = UIScreen.mainScreen().scale
         let options = PHImageRequestOptions()
         options.resizeMode = .Fast
-        
+
         self.imageManager.requestImageForAsset(asset, targetSize: CGSize(width: 88 * scale, height: 88 * scale), contentMode: .AspectFill, options: options, resultHandler: resultHandler)
     }
 }
