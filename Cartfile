@@ -1,1 +1,3 @@
-github "SnapKit/SnapKit"
+github "SnapKit/SnapKit" "swift-2.0"
+
+#git "file:///Users/mxy/Documents/Sina/myself/PhotoPicker"

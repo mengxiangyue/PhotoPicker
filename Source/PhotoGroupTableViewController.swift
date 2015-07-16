@@ -19,7 +19,8 @@ class PhotoGroupTableViewController: UIViewController, UITableViewDataSource {
         self.groupTableView = UITableView()
         self.groupTableView.dataSource = self
         self.groupTableView.rowHeight = 66.0
-        self.groupTableView.separatorInset = UIEdgeInsetsZero
+//        self.groupTableView.separatorInset = UIEdgeInsetsZero
+        self.groupTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.groupTableView.registerClass(PhotoGroupTableViewCell.self, forCellReuseIdentifier: groupTableViewCellIdentifier)
         self.view.addSubview(self.groupTableView)
         
@@ -45,15 +46,14 @@ class PhotoGroupTableViewController: UIViewController, UITableViewDataSource {
     
     // MARK: - UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 22
+        return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.groupTableViewCellIdentifier)
-        cell?.imageView?.image = UIImage(named: "1")
-        cell?.textLabel?.text = "测试"
-        return cell!
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier(self.groupTableViewCellIdentifier) as! PhotoGroupTableViewCell
+        cell.groupImageView.image = UIImage(named: "1")
+        cell.groupNameLable.text = "测试"
+        return cell        
     }
     
     // MARK: - click
