@@ -1,2 +1,4 @@
 
 framework/*
+Carthage/Checkouts/*
+Carthage/Build/Mac/*
