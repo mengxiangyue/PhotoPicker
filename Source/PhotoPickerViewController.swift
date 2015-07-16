@@ -64,6 +64,7 @@ public class PhotoPickerViewController: UINavigationController {
         self.view.addSubview(customToolbar)
         
         self.customLayout()
+        
     }
     
     // 定义布局

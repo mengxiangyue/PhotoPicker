@@ -53,11 +53,10 @@ class PhotoGroupTableViewCell: UITableViewCell {
             make.height.equalTo(self)
             make.width.equalTo(self.bounds.size.height)
             make.right.equalTo(self.groupNameLable.snp_left).offset(-20)
-            print(self.bounds.size.height)
         })
         
         self.groupNameLable.snp_makeConstraints { (make) -> Void in
-            make.center.equalTo(self)
+            make.centerY.equalTo(self)
             make.left.equalTo(self.groupImageView.snp_right).offset(20)
             make.right.equalTo(self).offset(-50)
         }

@@ -46,13 +46,14 @@ class PhotoGroupTableViewController: UIViewController, UITableViewDataSource {
     
     // MARK: - UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return PhotoPickerHelper.sharedInstance.photoGroups.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.groupTableViewCellIdentifier) as! PhotoGroupTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(self.groupTableViewCellIdentifier, forIndexPath: indexPath) as! PhotoGroupTableViewCell
+        let photoGroup = PhotoPickerHelper.sharedInstance.photoGroups[indexPath.row]
         cell.groupImageView.image = UIImage(named: "1")
-        cell.groupNameLable.text = "测试"
+        cell.groupNameLable.text = photoGroup.groupName
         return cell        
     }
     

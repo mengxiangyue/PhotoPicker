@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/PhotoGroupTableViewCell.swift"
-            timestampString = "458731538.233097"
+            timestampString = "458739559.547601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "init(style:reuseIdentifier:)"
             landmarkType = "5">
          </BreakpointContent>
