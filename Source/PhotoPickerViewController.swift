@@ -14,6 +14,7 @@ public class PhotoPickerViewController: UINavigationController {
     var customToolbar: UIToolbar!
     var previewBarButtonItem: UIBarButtonItem!
     var selectNumberBarButtonItem: UIBarButtonItem!
+    var doneBarButtonItem: UIBarButtonItem!
     
     
     // MARK: - init 为了实现一个无参数的构造方法 下面必须写上其他的两个方法 也是无奈了
@@ -26,8 +27,6 @@ public class PhotoPickerViewController: UINavigationController {
     }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        let photoGroupTableViewController = PhotoGroupTableViewController()
-        self.presentViewController(photoGroupTableViewController, animated: false, completion: nil)
     }
     
     override public func viewDidLoad() {
@@ -36,27 +35,25 @@ public class PhotoPickerViewController: UINavigationController {
         self.navigationBar.translucent = true
         self.navigationBar.barStyle = UIBarStyle.BlackTranslucent
         self.navigationBar.tintColor = UIColor.whiteColor()
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
-//            let tempBarStyle = UIApplication.sharedApplication().statusBarStyle
-//            if tempBarStyle != UIStatusBarStyle.LightContent {
-//                UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
-//            }
-//        })
         
         self.toolbarHidden = false
         self.customToolbar = UIToolbar()
         self.customToolbar.tintColor = UIColor.whiteColor()
         self.customToolbar.barStyle = UIBarStyle.Black
         
-        self.previewBarButtonItem = UIBarButtonItem(title: "　　", style: UIBarButtonItemStyle.Plain, target: self, action: "preview")
-        self.selectNumberBarButtonItem = UIBarButtonItem(title: "0/9", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
-        let doneBarButtonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Plain, target: self, action: "choiceDone")
+        self.previewBarButtonItem = UIBarButtonItem(title: "预览", style: UIBarButtonItemStyle.Plain, target: self, action: "preview")
+        self.previewBarButtonItem.enabled = false
+        self.selectNumberBarButtonItem = UIBarButtonItem(title: "0/\(PhotoPickerHelper.sharedInstance.allowMaxSelectedAssets)", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.selectNumberBarButtonItem.enabled = false
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "assetCountChange:", name: PhotoPickerHelper.sharedInstance.assetCountChageNotification, object: nil)
+        self.doneBarButtonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Plain, target: self, action: "choiceDone")
+        
         let items: [UIBarButtonItem] = [self.createFixBarButtonItem(UIBarButtonSystemItem.FixedSpace),
                     self.previewBarButtonItem,
                     self.createFixBarButtonItem(UIBarButtonSystemItem.FlexibleSpace),
                     self.selectNumberBarButtonItem,
                     self.createFixBarButtonItem(UIBarButtonSystemItem.FlexibleSpace),
-                    doneBarButtonItem,
+                    self.doneBarButtonItem,
                     self.createFixBarButtonItem(UIBarButtonSystemItem.FixedSpace)]
         self.customToolbar.setItems(items, animated: false)
         
@@ -64,6 +61,10 @@ public class PhotoPickerViewController: UINavigationController {
         self.view.addSubview(customToolbar)
         
         self.customLayout()
+        
+        PhotoPickerHelper.sharedInstance.clearSelectedAsset()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "overSelectedAsset:", name: PhotoPickerHelper.sharedInstance.overMaxSelectedNumberNotification, object: nil)
         
     }
     
@@ -84,6 +85,19 @@ public class PhotoPickerViewController: UINavigationController {
     // MARK: - 
     func cancle() {
         self.dismissViewControllerAnimated(true, completion: nil);
+    }
+    
+    // MARK: - UI change
+    func assetCountChange(notification: NSNotification) {
+        let selectCount = PhotoPickerHelper.sharedInstance.selectedPhotos.count
+        self.selectNumberBarButtonItem.title = "\(selectCount)/\(PhotoPickerHelper.sharedInstance.allowMaxSelectedAssets)"
+        self.previewBarButtonItem.enabled = selectCount > 0
+        self.selectNumberBarButtonItem.enabled = selectCount > 0
+        self.doneBarButtonItem.enabled = selectCount > 0
+    }
+    
+    func overSelectedAsset(notification: NSNotification) {
+        UIAlertView(title: "小主", message: "您最多只能选择\(PhotoPickerHelper.sharedInstance.allowMaxSelectedAssets)", delegate: nil, cancelButtonTitle: "取消").show()
     }
     
 }

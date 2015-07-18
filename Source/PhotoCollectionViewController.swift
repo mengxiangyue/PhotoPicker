@@ -14,19 +14,6 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDataSourc
     var photoGroup: PhotoGroup!
     var photoCollectionView: UICollectionView!
     
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//    }
-//    
-//    init() {
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//    
-//    init(photoGroup: PhotoGroup) {
-//        super.init(nibName: nil, bundle: nil)
-//        self.photoGroup = photoGroup
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
@@ -71,6 +58,7 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDataSourc
         let currentTag = cell.tag + 1
         cell.tag = currentTag
         let asset = photoGroup.assetsFetchResult[indexPath.item] as! PHAsset
+        cell.asset = asset
         let options = PHImageRequestOptions()
         options.resizeMode = .Fast
         PhotoPickerHelper.sharedInstance.photoThumbnails(asset) { (image, info) -> Void in

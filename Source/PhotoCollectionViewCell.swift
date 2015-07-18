@@ -7,11 +7,27 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     private var selectedView: UIView!
     var photoImageView: UIImageView!
-    var photoSelected = false
+    var asset: PHAsset! {
+        didSet {
+            self.photoSelected = PhotoPickerHelper.sharedInstance.isSelected(self.asset)
+        }
+    }
+    var photoSelected = false {
+        didSet {
+            if self.photoSelected {
+                self.selectedView.backgroundColor = UIColor.blueColor()
+                PhotoPickerHelper.sharedInstance.addSelectedAsset(self.asset)
+            } else {
+                self.selectedView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
+                PhotoPickerHelper.sharedInstance.removeSelectedAsset(self.asset)
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,15 +60,16 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     func tapCell(tap: UITapGestureRecognizer) {
         let location = tap.locationInView(self)
         if CGRectContainsPoint(CGRectInset(self.selectedView.frame, -5, -5), location) { // 点击在选择的按钮上
-            print("选择")
-            self.photoSelected = !self.photoSelected
-            if self.photoSelected {
-                self.selectedView.backgroundColor = UIColor.blueColor()
+            if !self.photoSelected { // 原状态是未选中
+                if PhotoPickerHelper.sharedInstance.selectedPhotos.count < PhotoPickerHelper.sharedInstance.allowMaxSelectedAssets {
+                    self.photoSelected = !self.photoSelected
+                } else {
+                    NSNotificationCenter.defaultCenter().postNotificationName(PhotoPickerHelper.sharedInstance.overMaxSelectedNumberNotification, object: nil)
+                }
             } else {
-                self.selectedView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
+                self.photoSelected = !self.photoSelected
             }
         } else {
-            print("预览")
         }
     }
     

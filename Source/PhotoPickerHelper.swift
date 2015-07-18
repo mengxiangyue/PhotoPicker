@@ -10,9 +10,13 @@ import Foundation
 import Photos
 
 class PhotoPickerHelper {
+    let assetCountChageNotification = "AssetCountChageNotification"
+    let overMaxSelectedNumberNotification = "OverMaxSelectedNumberNotification"
+    let allowMaxSelectedAssets = 2
     // 所有的照片分组
     var photoGroups = [PhotoGroup]()
     
+    var selectedPhotos: Set = Set<PHAsset>()
     var imageManager: PHImageManager!
     
     static let sharedInstance = {
@@ -70,6 +74,37 @@ class PhotoPickerHelper {
 
         self.imageManager.requestImageForAsset(asset, targetSize: CGSize(width: 88 * scale, height: 88 * scale), contentMode: .AspectFill, options: options, resultHandler: resultHandler)
     }
+    
+    // MARK: - selected 
+    func addSelectedAsset(asset: PHAsset) {
+        let assetSet: Set = [asset]
+        self.selectedPhotos = self.selectedPhotos.union(assetSet)
+        self.sendAssetCountChangeNotification()
+    }
+    
+    func removeSelectedAsset(asset: PHAsset) {
+        let assetSet: Set = [asset]
+        self.selectedPhotos = self.selectedPhotos.subtract(assetSet)
+        self.sendAssetCountChangeNotification()
+    }
+    
+    func isSelected(asset: PHAsset) -> Bool {
+        if self.selectedPhotos.contains(asset) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func clearSelectedAsset() {
+        self.selectedPhotos.removeAll()
+    }
+    
+//    NSNotificationCenter
+    private func sendAssetCountChangeNotification() {
+        NSNotificationCenter.defaultCenter().postNotificationName(self.assetCountChageNotification, object: nil)
+    }
+    
 }
 
 
