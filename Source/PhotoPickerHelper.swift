@@ -105,7 +105,7 @@ class PhotoPickerHelper {
         self.selectedPhotos.removeAll()
     }
     
-//    NSNotificationCenter
+    // NSNotificationCenter
     private func sendAssetCountChangeNotification() {
         NSNotificationCenter.defaultCenter().postNotificationName(self.assetCountChageNotification, object: nil)
     }
