@@ -104,7 +104,8 @@ public class PhotoPickerViewController: UINavigationController {
     
     // MARK: - BarButtonClick:
     func preview() {
-        print("click preview")
+        let photoBrowserViewController = PhotoBrowserViewController()
+        self.pushViewController(photoBrowserViewController, animated: true)
     }
     
     func choiceDone() {
