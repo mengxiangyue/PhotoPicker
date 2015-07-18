@@ -18,7 +18,7 @@ class PhotoGroupTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         // Cell选中的颜色
-//        self.selectionStyle = UITableViewCellSelectionStyle.None
+        self.selectionStyle = UITableViewCellSelectionStyle.None
         
         self.groupImageView = UIImageView()
         self.groupImageView.contentMode = UIViewContentMode.ScaleAspectFill

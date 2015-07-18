@@ -43,9 +43,11 @@ public class PhotoPickerViewController: UINavigationController {
         
         self.previewBarButtonItem = UIBarButtonItem(title: "预览", style: UIBarButtonItemStyle.Plain, target: self, action: "preview")
         self.previewBarButtonItem.enabled = false
+        
         self.selectNumberBarButtonItem = UIBarButtonItem(title: "0/\(PhotoPickerHelper.sharedInstance.allowMaxSelectedAssets)", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         self.selectNumberBarButtonItem.enabled = false
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "assetCountChange:", name: PhotoPickerHelper.sharedInstance.assetCountChageNotification, object: nil)
+        
         self.doneBarButtonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Plain, target: self, action: "choiceDone")
         
         let items: [UIBarButtonItem] = [self.createFixBarButtonItem(UIBarButtonSystemItem.FixedSpace),
@@ -97,7 +99,17 @@ public class PhotoPickerViewController: UINavigationController {
     }
     
     func overSelectedAsset(notification: NSNotification) {
-        UIAlertView(title: "小主", message: "您最多只能选择\(PhotoPickerHelper.sharedInstance.allowMaxSelectedAssets)", delegate: nil, cancelButtonTitle: "取消").show()
+        UIAlertView(title: "小主", message: "您最多只能选择\(PhotoPickerHelper.sharedInstance.allowMaxSelectedAssets)", delegate: nil, cancelButtonTitle: "确定").show()
+    }
+    
+    // MARK: - BarButtonClick:
+    func preview() {
+        print("click preview")
+    }
+    
+    func choiceDone() {
+        print("click choiceDone")
+        self.cancle()
     }
     
 }

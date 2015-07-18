@@ -12,10 +12,10 @@ import Photos
 class PhotoPickerHelper {
     let assetCountChageNotification = "AssetCountChageNotification"
     let overMaxSelectedNumberNotification = "OverMaxSelectedNumberNotification"
-    let allowMaxSelectedAssets = 2
+    // 允许选择的照片的最大数
+    let allowMaxSelectedAssets = 9
     // 所有的照片分组
     var photoGroups = [PhotoGroup]()
-    
     var selectedPhotos: Set = Set<PHAsset>()
     var imageManager: PHImageManager!
     
@@ -28,22 +28,27 @@ class PhotoPickerHelper {
         
         // 所有图片
         let options = PHFetchOptions()
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-        let assetsFetchResults = PHAsset.fetchAssetsWithOptions(options)
-        if assetsFetchResults.count > 0 {
-            // TODO: 国际化
-            let photoGroup = PhotoGroup(groupName: "相机胶卷", assetsFetchResult: assetsFetchResults)
-            self.photoGroups += [photoGroup]
-        }
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+//        let assetsFetchResults = PHAsset.fetchAssetsWithOptions(options)
+//        if assetsFetchResults.count > 0 {
+//            // TODO: 国际化
+//            let photoGroup = PhotoGroup(groupName: "相机胶卷", assetsFetchResult: assetsFetchResults)
+//            self.photoGroups += [photoGroup]
+//        }
         
         // 默认图片分组
         let smartAlbums = PHAssetCollection.fetchAssetCollectionsWithType(.SmartAlbum, subtype:.AlbumRegular , options: nil)
         for var i = 0; i < smartAlbums.count; i++ {
             let collection = smartAlbums[i] as! PHAssetCollection
-            let assetsFetchResults = PHAsset.fetchAssetsInAssetCollection(smartAlbums[i] as! PHAssetCollection, options: nil)
+            let assetsFetchResults = PHAsset.fetchAssetsInAssetCollection(collection, options: options)
             if assetsFetchResults.count > 0 {
                 let photoGroup = PhotoGroup(groupName: collection.localizedTitle, assetsFetchResult: assetsFetchResults)
-                self.photoGroups += [photoGroup]
+                // TODO: - 这里这样判断有问题 国际化的时候会出问题
+                if collection.localizedTitle == "相机胶卷" {
+                    self.photoGroups.insert(photoGroup, atIndex: 0)
+                } else {
+                    self.photoGroups += [photoGroup]
+                }
             }
         }
         
@@ -51,7 +56,7 @@ class PhotoPickerHelper {
         let topLevelUserCollections = PHCollectionList.fetchTopLevelUserCollectionsWithOptions(nil)
         for var i = 0; i < topLevelUserCollections.count; i++ {
             let collection = topLevelUserCollections[i] as! PHAssetCollection
-            let assetsFetchResults = PHAsset.fetchAssetsInAssetCollection(smartAlbums[i] as! PHAssetCollection, options: nil)
+            let assetsFetchResults = PHAsset.fetchAssetsInAssetCollection(collection, options: options)
             if assetsFetchResults.count > 0 {
                 let photoGroup = PhotoGroup(groupName: collection.localizedTitle, assetsFetchResult: assetsFetchResults)
                 self.photoGroups += [photoGroup]
