@@ -6,7 +6,7 @@
 //  Copyright © 2015年 mxy. All rights reserved.
 //
 // 孟祥月 http://blog.csdn.net/mengxiangyue
-// 目前还存在的问题 照片浏览界面 没有实现自动布局 
+// 目前还存在的问题 照片浏览界面 没有实现自动布局 、 图片浏览单击图片 navigationBar toolBar动画消失  都是因为自动布局的事情
 
 import UIKit
 import SnapKit
