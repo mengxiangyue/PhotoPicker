@@ -26,15 +26,31 @@ public class PhotoPickerHelper {
     private init() {
         self.imageManager = PHImageManager.defaultManager()
         
+        // 获取当前应用对照片的访问授权状态
+        let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+        // 如果没有获取访问授权，或者访问授权状态已经被明确禁止，则显示提示语，引导用户开启授权
+        if (authorizationStatus == PHAuthorizationStatus.Restricted || authorizationStatus == PHAuthorizationStatus.Denied) {
+//            NSDictionary *mainInfoDictionary = [[NSBundle mainBundle] infoDictionary];
+//            NSString *appName = [mainInfoDictionary objectForKey:@"CFBundleDisplayName"];
+//            tipTextWhenNoPhotosAuthorization = [NSString stringWithFormat:@"请在设备的\"设置-隐私-照片\"选项中，允许%@访问你的手机相册", appName];
+//            // 展示提示语
+            PHAssetCollection.fetchAssetCollectionsWithType(PHAssetCollectionType.SmartAlbum, subtype:PHAssetCollectionSubtype.AlbumRegular, options:nil)
+        } else {
+            self.generatePhotoGroups()
+        }
+        
+    }
+    
+    func generatePhotoGroups() {
         // 所有图片
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-//        let assetsFetchResults = PHAsset.fetchAssetsWithOptions(options)
-//        if assetsFetchResults.count > 0 {
-//            // TODO: 国际化
-//            let photoGroup = PhotoGroup(groupName: "相机胶卷", assetsFetchResult: assetsFetchResults)
-//            self.photoGroups += [photoGroup]
-//        }
+        //        let assetsFetchResults = PHAsset.fetchAssetsWithOptions(options)
+        //        if assetsFetchResults.count > 0 {
+        //            // TODO: 国际化
+        //            let photoGroup = PhotoGroup(groupName: "相机胶卷", assetsFetchResult: assetsFetchResults)
+        //            self.photoGroups += [photoGroup]
+        //        }
         
         // 默认图片分组
         let smartAlbums = PHAssetCollection.fetchAssetCollectionsWithType(.SmartAlbum, subtype:.AlbumRegular , options: nil)
