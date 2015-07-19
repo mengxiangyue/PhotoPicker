@@ -1,4 +1,6 @@
-# PhotoPicker
+# PhotoPicker  
+
+<img src="http://ww1.sinaimg.cn/bmiddle/6858b495jw1eu8m1kq28zg207q0ed4qq.gif" alt="" />
 
 前段时间在网上找使用PhotoKit写照片选择的例子，基本上就没有，所以自己使用PhotoKit做的一个小例子，用于iOS系统照片的选择。主要是用到了PhotoKit、自动布局（SnapKit）、UIPageViewController，支持iPhone、iPad，但是照片浏览在iPad上还是有点问题。
    
