@@ -9,9 +9,15 @@
 import UIKit
 import Photos
 
+protocol PhotoCollectionViewCellDelegage: NSObjectProtocol {
+    func previewAllPhotos(startIndex: Int)
+}
+
 class PhotoCollectionViewCell: UICollectionViewCell {
+    var index: Int!
     private var selectedView: UIView!
     var photoImageView: UIImageView!
+    weak var delegage: PhotoCollectionViewCellDelegage?
     var asset: PHAsset! {
         didSet {
             self.photoSelected = PhotoPickerHelper.sharedInstance.isSelected(self.asset)
@@ -70,6 +76,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
                 self.photoSelected = !self.photoSelected
             }
         } else {
+            self.delegage?.previewAllPhotos(self.index)
         }
     }
     

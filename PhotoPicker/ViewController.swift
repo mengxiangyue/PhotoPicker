@@ -8,9 +8,12 @@
 
 import UIKit
 import PhotoPicker
+import Photos
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, PhotoPickerViewControllerDelegate {
+    
+    var scrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let rightButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "rightButtonClick:")
@@ -20,7 +23,18 @@ class ViewController: UIViewController {
 
     func rightButtonClick(buttonItem: UIBarButtonItem) {
         let photoPickerViewController = PhotoPickerViewController()
+        photoPickerViewController.photoPickerDelegate = self
         self.presentViewController(photoPickerViewController, animated: true, completion: nil)
+    }
+    
+    func photoPickerDidFinish(photos: [PHAsset]) {
+        for var i = 0; i < photos.count; i++ {
+            let imageView = UIImageView(frame: CGRect(x: 0, y: i * 88 + 66, width: 88, height: 88))
+            PhotoPickerHelper.sharedInstance.photoThumbnails(photos[i], resultHandler: { (image, userInfo) -> Void in
+                imageView.image = image 
+            })
+            self.view.addSubview(imageView)
+        }
     }
 
 

@@ -9,7 +9,7 @@
 import Foundation
 import Photos
 
-class PhotoPickerHelper {
+public class PhotoPickerHelper {
     let assetCountChageNotification = "AssetCountChageNotification"
     let overMaxSelectedNumberNotification = "OverMaxSelectedNumberNotification"
     // 允许选择的照片的最大数
@@ -19,7 +19,7 @@ class PhotoPickerHelper {
     var selectedPhotos: Set = Set<PHAsset>()
     var imageManager: PHImageManager!
     
-    static let sharedInstance = {
+    public static let sharedInstance = {
             return PhotoPickerHelper()
         }()
     
@@ -72,12 +72,21 @@ class PhotoPickerHelper {
     // 获取分组内的照片
     
     // 获取某一张照片缩略图
-    func photoThumbnails(asset: PHAsset!, resultHandler: (UIImage?, [NSObject : AnyObject]?) -> Void) {
+    public func photoThumbnails(asset: PHAsset!, resultHandler: (UIImage?, [NSObject : AnyObject]?) -> Void) {
+//        let scale = UIScreen.mainScreen().scale
+//        let options = PHImageRequestOptions()
+//        options.resizeMode = .Fast
+//
+//        self.imageManager.requestImageForAsset(asset, targetSize: CGSize(width: 88 * scale, height: 88 * scale), contentMode: .AspectFill, options: options, resultHandler: resultHandler)
+        return self.photoImage(CGSize(width: 88, height: 88), asset: asset, resultHandler: resultHandler)
+    }
+    
+    public func photoImage(targetSize: CGSize, asset: PHAsset!, resultHandler: (UIImage?, [NSObject : AnyObject]?) -> Void) {
         let scale = UIScreen.mainScreen().scale
         let options = PHImageRequestOptions()
         options.resizeMode = .Fast
-
-        self.imageManager.requestImageForAsset(asset, targetSize: CGSize(width: 88 * scale, height: 88 * scale), contentMode: .AspectFill, options: options, resultHandler: resultHandler)
+        
+        self.imageManager.requestImageForAsset(asset, targetSize: CGSize(width: targetSize.width * scale, height: targetSize.height * scale), contentMode: .AspectFill, options: options, resultHandler: resultHandler)
     }
     
     // MARK: - selected 

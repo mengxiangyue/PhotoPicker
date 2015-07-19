@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class PhotoCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class PhotoCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, PhotoCollectionViewCellDelegage {
     let photoCollectionViewIdentifier = "PhotoCollectionViewCell"
     var photoGroup: PhotoGroup!
     var photoCollectionView: UICollectionView!
@@ -30,6 +30,7 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDataSourc
         self.view.addSubview(self.photoCollectionView)
         
         self.customLayout()
+        
     }
     
     func customLayout() {
@@ -45,6 +46,8 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDataSourc
         super.viewWillAppear(animated)
         let cancleBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Plain, target: self, action: "cancle:")
         self.navigationItem.rightBarButtonItem = cancleBarButtonItem
+        
+        self.photoCollectionView.reloadData()
     }
     
     // MARK: - UICollectionViewDataSource
@@ -57,8 +60,10 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDataSourc
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.photoCollectionViewIdentifier, forIndexPath: indexPath) as! PhotoCollectionViewCell
         let currentTag = cell.tag + 1
         cell.tag = currentTag
-        let asset = photoGroup.assetsFetchResult[indexPath.item] as! PHAsset
+        let asset = self.photoGroup.assetsFetchResult[indexPath.item] as! PHAsset
         cell.asset = asset
+        cell.index = indexPath.item
+        cell.delegage = self
         let options = PHImageRequestOptions()
         options.resizeMode = .Fast
         PhotoPickerHelper.sharedInstance.photoThumbnails(asset) { (image, info) -> Void in
@@ -72,10 +77,20 @@ class PhotoCollectionViewController: UIViewController, UICollectionViewDataSourc
         return cell
     }
     
+    // MARK: - PhotoCollectionViewCellDelegage 
+    func previewAllPhotos(startIndex: Int) {
+        let photoBrowserViewController = PhotoBrowserViewController()
+        photoBrowserViewController.photos = self.photoGroup.assetsFetchResult.objectsAtIndexes(NSIndexSet(indexesInRange: NSRange(location:0, length:self.photoGroup.assetsFetchResult.count))) as! [PHAsset]
+        photoBrowserViewController.startIndex = startIndex
+        self.navigationController?.pushViewController(photoBrowserViewController, animated: true)
+    }
+    
     
     // MARK: - click
     func cancle(barButtonItme: UIBarButtonItem) {
         (self.navigationController as! PhotoPickerViewController).cancle()
     }
+    
+    // MARK: - NSNotification
 
 }

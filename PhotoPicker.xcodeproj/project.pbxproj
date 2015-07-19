@@ -26,7 +26,7 @@
 		8EEBDC851B581C5B0039D89B /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEBDC841B581C5B0039D89B /* SnapKit.framework */; };
 		8EEBDC861B581C5B0039D89B /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEBDC841B581C5B0039D89B /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EEBDC8B1B5A25380039D89B /* PhotoBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBDC8A1B5A25380039D89B /* PhotoBrowserViewController.swift */; };
-		8EEBDC8D1B5A25AD0039D89B /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBDC8C1B5A25AD0039D89B /* PhotoView.swift */; };
+		8EEBDC8D1B5A25AD0039D89B /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBDC8C1B5A25AD0039D89B /* PhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +76,7 @@
 		8EE756AD1B5567510055E3D2 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		8EEBDC841B581C5B0039D89B /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		8EEBDC8A1B5A25380039D89B /* PhotoBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserViewController.swift; sourceTree = "<group>"; };
-		8EEBDC8C1B5A25AD0039D89B /* PhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		8EEBDC8C1B5A25AD0039D89B /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +145,7 @@
 				8EE756AD1B5567510055E3D2 /* PhotoCollectionViewCell.swift */,
 				8E93EC311B56584B00D9E7DA /* PhotoPickerHelper.swift */,
 				8EEBDC8A1B5A25380039D89B /* PhotoBrowserViewController.swift */,
-				8EEBDC8C1B5A25AD0039D89B /* PhotoView.swift */,
+				8EEBDC8C1B5A25AD0039D89B /* PhotoViewController.swift */,
 			);
 			name = PhotoPicker;
 			path = Source;
@@ -283,7 +283,7 @@
 				8EE756A61B5566B00055E3D2 /* PhotoGroupTableViewCell.swift in Sources */,
 				8EE756AA1B5566F80055E3D2 /* PhotoPickerViewController.swift in Sources */,
 				8EE756AC1B55672E0055E3D2 /* PhotoCollectionViewController.swift in Sources */,
-				8EEBDC8D1B5A25AD0039D89B /* PhotoView.swift in Sources */,
+				8EEBDC8D1B5A25AD0039D89B /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

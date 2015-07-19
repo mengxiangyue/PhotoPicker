@@ -5,9 +5,16 @@
 //  Created by mxy on 15/7/14.
 //  Copyright © 2015年 mxy. All rights reserved.
 //
+// 孟祥月 http://blog.csdn.net/mengxiangyue
+// 目前还存在的问题 照片浏览界面 没有实现自动布局 
 
 import UIKit
 import SnapKit
+import Photos
+
+public protocol PhotoPickerViewControllerDelegate: NSObjectProtocol {
+    func photoPickerDidFinish(photos: [PHAsset])
+}
 
 public class PhotoPickerViewController: UINavigationController {
     
@@ -15,6 +22,8 @@ public class PhotoPickerViewController: UINavigationController {
     var previewBarButtonItem: UIBarButtonItem!
     var selectNumberBarButtonItem: UIBarButtonItem!
     var doneBarButtonItem: UIBarButtonItem!
+    
+    public weak var photoPickerDelegate: PhotoPickerViewControllerDelegate?
     
     
     // MARK: - init 为了实现一个无参数的构造方法 下面必须写上其他的两个方法 也是无奈了
@@ -76,7 +85,7 @@ public class PhotoPickerViewController: UINavigationController {
             make.bottom.equalTo(self.view)
             make.left.equalTo(self.view)
             make.right.equalTo(self.view)
-            make.height.equalTo(self.toolbar)
+            make.height.equalTo(self.toolbar).priorityLow()
         }
     }
     
@@ -98,6 +107,30 @@ public class PhotoPickerViewController: UINavigationController {
         self.doneBarButtonItem.enabled = selectCount > 0
     }
     
+//    func setCustomToolbarHiddent(hidden: Bool, animated: Bool) {
+//        self.toolbarHidden = hidden
+//        self.customToolbar.snp_updateConstraints { (make) -> Void in
+//            if hidden {
+//                make.height.equalTo(0)
+//                make.bottom.equalTo(self.toolbar.frame.size.height)
+//            } else {
+//                make.height.equalTo(self.toolbar)
+//                make.bottom.equalTo(self.view)
+//            }
+//            
+//        }
+//    }
+    
+    func setLeftBarButtonItemHidden(hidden: Bool) {
+        if hidden {
+            self.previewBarButtonItem.enabled = false
+            self.previewBarButtonItem.title = "　　"
+        } else {
+            self.previewBarButtonItem.enabled = PhotoPickerHelper.sharedInstance.selectedPhotos.count > 0
+            self.previewBarButtonItem.title = "预览"
+        }
+    }
+    
     func overSelectedAsset(notification: NSNotification) {
         UIAlertView(title: "小主", message: "您最多只能选择\(PhotoPickerHelper.sharedInstance.allowMaxSelectedAssets)", delegate: nil, cancelButtonTitle: "确定").show()
     }
@@ -105,11 +138,12 @@ public class PhotoPickerViewController: UINavigationController {
     // MARK: - BarButtonClick:
     func preview() {
         let photoBrowserViewController = PhotoBrowserViewController()
+        photoBrowserViewController.photos = Array(PhotoPickerHelper.sharedInstance.selectedPhotos)
         self.pushViewController(photoBrowserViewController, animated: true)
     }
     
     func choiceDone() {
-        print("click choiceDone")
+        self.photoPickerDelegate?.photoPickerDidFinish(Array(PhotoPickerHelper.sharedInstance.selectedPhotos))
         self.cancle()
     }
     
